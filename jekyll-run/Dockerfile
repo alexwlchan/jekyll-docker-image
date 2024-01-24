@@ -1,16 +1,4 @@
-# Note: I can't use Ruby 3.2 yet because Jekyll uses Liquid 4, and Liquid 4
-# throws an exception if you use it with Ruby 3.2:
-#
-#     Liquid Exception: undefined method `tainted?' for { ... post ...}
-#
-# The fix is available in Liquid 5, but that isn't supported by Jekyll yet.
-#
-# There are various bugs tracking this on the Jekyll repository, e.g. see
-# https://github.com/jekyll/jekyll/issues/9233
-# https://github.com/jekyll/jekyll/issues/8535
-#
-# If/when Jekyll allows a Liquid upgrade, then I can bump this to Ruby 3.2.
-FROM ruby:3.1-slim
+FROM ruby:3.2-slim
 
 LABEL maintainer "Alex Chan <alex@alexwlchan.net>"
 LABEL description "Build image for alexwlchan.net"
@@ -29,6 +17,6 @@ RUN ./install_jekyll.sh
 # as proper gems -- it'll do for now.
 #
 # TODO: Look at packaging some of these as proper gems.
-ADD plugins /usr/local/lib/ruby/3.1.0/alexwlchan
+ADD plugins /usr/local/lib/ruby/3.2.0/alexwlchan
 
 ENTRYPOINT ["bundle", "exec", "jekyll"]
